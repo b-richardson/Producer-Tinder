@@ -1,5 +1,7 @@
 const express = require("express");
 const expressReactViews = require('express-react-views');
+const passport = require("passport")
+const router = express.Router();
 const path = require('path');
 const app = express();
 // const routes = require("./routes/index");
@@ -34,5 +36,6 @@ app.get('/express_backend', (req, res) => { //Line 9
     res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' }); //Line 10
   });
 
+app.use(passport.initialize());
 
 // app.use("/", routes);
