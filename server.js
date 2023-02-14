@@ -1,6 +1,7 @@
 const express = require("express");
 const expressReactViews = require('express-react-views');
 const passport = require("passport")
+const LocalStrategy = require("passport-local").Strategy;
 const router = express.Router();
 const path = require('path');
 const app = express();
@@ -37,5 +38,6 @@ app.get('/express_backend', (req, res) => { //Line 9
   });
 
 app.use(passport.initialize());
+app.use(passport.session());
 
 // app.use("/", routes);
