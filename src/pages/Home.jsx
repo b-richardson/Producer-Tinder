@@ -25,7 +25,7 @@ const Home = () => {
     const [message, setMessage] = useState('')
 
     useEffect(() => {
-        const url = '/api/secret';
+        const url = '/api/home';
 
         const fetchData = async () => {
             try {
