@@ -9,31 +9,54 @@
 //   );
 // };
 
-// export default Home;
 
-import React, { useState } from 'react';
+
+import React, { useEffect, useState } from 'react';
 import { Form, Input, Button, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 import './App.css';
 
+
+
 const Home = () => {
-  const [form] = Form.useForm();
-  const [loading, setLoading] = useState(false);
+    const [form] = Form.useForm();
+    const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState('')
 
-  const onFinish = values => {
-    console.log('Received values of form: ', values);
-    setLoading(true);
+    useEffect(() => {
+        const url = '/api/secret';
 
-    // Simulate a network request
-    setTimeout(() => {
-      setLoading(false);
-      message.success('Login successful');
-    }, 1000);
-  };
+        const fetchData = async () => {
+            try {
+              const response = await fetch(url);
+              const json = await response.json();
+              console.log(json.message);
+              setMessage(json.message);
+            } catch (error) {
+              console.log("error", error);
+            }
+          };
+
+          fetchData();
+    },[]);
+
+    const onFinish = values => {
+        console.log('Received values of form: ', values);
+        setLoading(true);
+    
+        // Simulate a network request
+        setTimeout(() => {
+          setLoading(false);
+          message.success('Login successful');
+        }, 1000);
+      };
+
 
   return (
     <div className="App">
       <h2>Welcome to Our Music Collaboration App</h2>
+      <p>Here is the passowrd message:{message}</p>
       <Form
         form={form}
         name="normal_login"
@@ -72,9 +95,13 @@ const Home = () => {
           </Button>
         </Form.Item>
       </Form>
+      <Link to="/register">
+        <Button type="primary" style={{ marginTop: 16 }}>
+          Register
+        </Button>
+      </Link>
     </div>
   );
 };
 
 export default Home;
-

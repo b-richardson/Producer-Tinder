@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import{ BrowserRouter, Routes, Route } from 'react-router-dom';
-// import logo from './logo.svg';
 import './App.css';
 
 import Home from './pages/Home.jsx'
+import Secret from './pages/Secret.jsx'
+import Register from './pages/Register.jsx'
 
 class App extends Component {
 state = {
@@ -32,6 +33,8 @@ state = {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home/>} />
+          <Route path="/secret" element={<Secret/>} />
+          <Route path="/register" element={<Register/>} />
         </Routes>
       </BrowserRouter>
     );
