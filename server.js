@@ -30,6 +30,7 @@ connectDB();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jsx');
 app.engine('jsx', expressReactViews.createEngine());
+app.use(express.json());
 
 
 app.listen(port, () => {
@@ -70,4 +71,16 @@ app.post('/users', async (req, res) => {
     //   res.status(500).json({ message: 'Server error' });
     // }
   });
+  
+  app.post('/api/login', async (req, res) =>{
+    try {
+      await User.create({
+        email: req.body.email,
+        password: req.body.password,
+      })
+      res.json({ status: 'ok' })
+    } catch (err) {
+      res.json({ status: 'error', error: 'Duplicate emial'})
+    }
+  })
   
