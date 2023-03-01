@@ -11,7 +11,7 @@ const port = process.env.PORT || 5000;
 const dbConnection = process.env.DB_CONNECTION;
 const connectDB = require('./config/database');
 const User = require('./src/models/User.js');
-// set back tonight
+// set back
 
 require('dotenv').config({
     path: path.resolve(__dirname, 'config/.env'),
@@ -40,7 +40,7 @@ app.get('/express_backend', (req, res) => { //Line 9
     res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' }); //Line 10
   });
 app.get('/api/home', function(req, res) {
-    res.json({ message: 'Welcome!'});
+    res.send({ message: 'Welcome!'});
 });
 app.get('/api/secret', function(req, res) {
     res.json({message: 'The password is keyboardcat'});

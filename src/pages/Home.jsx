@@ -1,15 +1,3 @@
-// import React from 'react';
-
-// const Home = () => {
-//   return (
-//     <div>
-//       <h1>Welcome to the Music Collaboration App</h1>
-//       <p>This is the homepage of the Music Collaboration App where producers can connect and collaborate with each other.</p>
-//     </div>
-//   );
-// };
-
-
 
 import React, { useEffect, useState } from 'react';
 import { Form, Input, Button, message } from 'antd';
@@ -22,7 +10,8 @@ import './App.css';
 const Home = () => {
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState('')
+    const [message, setMessage] = useState('');
+    const [backend, setBackend] = useState('');
 
     useEffect(() => {
         const url = '/api/home';
@@ -41,6 +30,26 @@ const Home = () => {
           fetchData();
     },[]);
 
+    useEffect(() => {
+      const url = '/express_backend';
+
+      const fetchBackend = async () => {
+          try {
+            const response = await fetch(url);
+            const json = await response.json();
+            console.log(json.express);
+            setBackend(json.express);
+          } catch (error) {
+            console.log("error", error);
+          }
+        };
+
+        fetchBackend();
+  },[]);
+
+
+
+
     const onFinish = values => {
         console.log('Received values of form: ', values);
         setLoading(true);
@@ -57,6 +66,7 @@ const Home = () => {
     <div className="App">
       <h2>Welcome to Our Music Collaboration App</h2>
       <p>Here is the passowrd message:{message}</p>
+      <p>Express Backend:{backend}</p>
       <Form
         form={form}
         name="normal_login"
